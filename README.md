@@ -14,7 +14,7 @@ CodeforcesApi api = new CodeforcesApi(key, secret);
 ```java
 // Group contest: requires authorization
 StatusRequestBuilder statusRequestBuilder = api.newStatusRequest();
-statusRequestBuilder.setContestId(...).setGroupCode("...");
+statusRequestBuilder.setContestId(522146).setGroupCode("ANhuR0iBIH");
 statusRequestBuilder.setAsManager(true);
 statusRequestBuilder.setCount(5);
 
@@ -25,8 +25,7 @@ System.out.println(req.sendRequest());
 ```java
 // Public contest
 StatusRequestBuilder statusRequestBuilder = api.newStatusRequest();
-statusRequestBuilder.setContestId(2000);
-statusRequestBuilder.setCount(8);
+statusRequestBuilder.setContestId(2000).setCount(8);
 
 Request<StatusResult> req = statusRequestBuilder.build();
 System.out.println(req.sendRequest());
