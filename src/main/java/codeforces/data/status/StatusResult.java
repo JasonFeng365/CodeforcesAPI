@@ -1,7 +1,5 @@
 package codeforces.data.status;
 
-import codeforces.data.ApiMethod;
-
 import java.util.Arrays;
 
 public class StatusResult {

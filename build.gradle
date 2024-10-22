@@ -1,9 +1,11 @@
 plugins {
     id 'java'
+    id 'java-library'
+    id 'maven-publish'
 }
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
+group = 'jasonfeng365.codeforces'
+version = '0.1'
 
 repositories {
     mavenCentral()
@@ -11,20 +13,20 @@ repositories {
         url 'https://jitpack.io'
     }
 }
-//dependencyResolutionManagement {
-//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-//    repositories {
-//        mavenCentral()
-//        maven { url 'https://jitpack.io' }
-//    }
-//}
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
 }
 
-test {
-    useJUnitPlatform()
+publishing {
+    publications {
+        library(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url = layout.buildDirectory.dir("publishing-repository")
+        }
+    }
 }
