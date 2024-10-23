@@ -1,6 +1,7 @@
-package codeforces.util;
+package codeforces;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.URI;
@@ -21,7 +22,6 @@ public final class Request<ResponseType> {
 	private final TreeMap<String, String> params;
 	private final String key, secret, methodName;
 	private final boolean authorized;
-	private boolean doAuth;
 	private String curRandom;
 	Request(String methodName, TreeMap<String, String> params, Class<ResponseType> responseTypeClass) {
 		this.methodName = methodName;
@@ -63,7 +63,7 @@ public final class Request<ResponseType> {
 
 	private String getParamString() {
 		TreeMap<String, String> params = new TreeMap<>(this.params);
-		if (doAuth) {
+		if (authorized) {
 			params.put("apiKey", key);
 			params.put("time", getTimeSeconds());
 		}
@@ -77,7 +77,6 @@ public final class Request<ResponseType> {
 
 	private String getHash() {
 		curRandom = getRand();
-		curRandom = "123456";
 
 		String paramString = getParamString();
 		String toHash = String.format("%s/%s?%s#%s", curRandom, methodName, paramString, secret);
@@ -88,17 +87,16 @@ public final class Request<ResponseType> {
 		return curRandom+hashed;
 	}
 
-	private String getURL() {
+	public String getURL() {
 		String allParams = getParamString();
 		StringBuilder base = new StringBuilder(API_ENDPOINT);
 		base.append(methodName);
 		if (!allParams.isEmpty()) base.append('?').append(allParams);
-		if (doAuth) {
+		if (authorized) {
 			String hashed = getHash();
 			base.append("&apiSig=").append(hashed);
 		}
 		return base.toString();
-
 	}
 
 	/*
@@ -123,9 +121,7 @@ public final class Request<ResponseType> {
 	print("Time:", time)
 	print("apiSig: 123456"+hash_value)
 	 */
-	public ResponseType sendRequest() {
-		return sendRequest(authorized);
-	}
+
 	private String makeHttpRequest() {
 		try {
 			HttpClient client = HttpClient.newHttpClient();
@@ -149,12 +145,11 @@ public final class Request<ResponseType> {
 		}
 	}
 
-	public synchronized ResponseType sendRequest(boolean authorize) {
-		doAuth = authorize;
-
+	public synchronized ResponseType sendRequest() {
 		String jsonString = makeHttpRequest();
 
 		ObjectMapper mapper = new ObjectMapper();
+//		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		ResponseType response = null;
 		try {
 			response = mapper.readValue(jsonString, responseTypeClass);

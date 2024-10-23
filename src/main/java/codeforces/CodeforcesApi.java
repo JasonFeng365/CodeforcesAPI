@@ -1,7 +1,5 @@
 package codeforces;
 
-import codeforces.util.StatusRequestBuilder;
-
 public final class CodeforcesApi {
 	private final String KEY, SECRET;
 	private final boolean authenticated;

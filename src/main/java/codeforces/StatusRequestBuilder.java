@@ -1,4 +1,4 @@
-package codeforces.util;
+package codeforces;
 
 import codeforces.data.status.StatusResult;
 

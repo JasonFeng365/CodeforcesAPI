@@ -1,4 +1,4 @@
-package codeforces.util;
+package codeforces;
 
 import java.util.Map;
 import java.util.TreeMap;
