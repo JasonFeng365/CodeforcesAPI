@@ -1,6 +1,6 @@
 package codeforces;
 
-import codeforces.data.status.StatusResult;
+import codeforces.data.StatusResult;
 
 public final class StatusRequestBuilder extends RequestBuilder<StatusResult> {
 	public StatusRequestBuilder() {
