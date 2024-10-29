@@ -4,13 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Submission {
-	public long id, contestId, creationTimeSeconds, relativeTimeSeconds;
-	public Problem problem;
-	public Party author;
-
-	public String programmingLanguage, verdict, testset;
-	public long passedTestCount, timeConsumedMillis, memoryConsumedBytes;
-	public float points;
+	private long id, contestId, creationTimeSeconds, relativeTimeSeconds;
+	private Problem problem;
+	private Party author;
+	private String programmingLanguage, verdict, testset;
+	private long passedTestCount, timeConsumedMillis, memoryConsumedBytes;
+	private float points;
 
 	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
 	public Submission(

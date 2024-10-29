@@ -8,13 +8,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class Party {
-	public long contestId;
-	public List<Member> members;
-	public String participantType;
-	public long teamId;
-	public String teamName;
-	public boolean ghost;
-	public long room, startTimeSeconds;
+	private long contestId;
+	private List<Member> members;
+	private String participantType;
+	private long teamId;
+	private String teamName;
+	private boolean ghost;
+	private long room, startTimeSeconds;
 
 	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
 	public Party(
@@ -28,7 +28,8 @@ public class Party {
 			@JsonProperty("startTimeSeconds") long startTimeSeconds
 	) {
 		this.contestId = contestId;
-		this.members = Collections.unmodifiableList(Arrays.asList(members));
+		if (members==null) members = new Member[0];
+		this.members = List.of(members);
 		this.participantType = participantType;
 		this.teamId = teamId;
 		this.teamName = teamName;

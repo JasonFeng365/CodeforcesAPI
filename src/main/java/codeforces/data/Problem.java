@@ -8,11 +8,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class Problem {
-	public long contestId;
-	public String problemsetName, index, name, type;
-	public float points;
-	public int rating;
-	public List<String> tags;
+	private long contestId;
+	private String problemsetName, index, name, type;
+	private float points;
+	private int rating;
+	private List<String> tags;
 
 	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
 	public Problem(
@@ -32,7 +32,8 @@ public class Problem {
 		this.type = type;
 		this.points = points;
 		this.rating = rating;
-		this.tags = Collections.unmodifiableList(Arrays.asList(tags));
+		if (tags==null) tags = new String[0];
+		this.tags = List.of(tags);
 	}
 
 	public long getContestId() {

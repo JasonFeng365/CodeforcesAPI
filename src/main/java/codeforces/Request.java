@@ -149,7 +149,10 @@ public final class Request<ResponseType> {
 		String jsonString = makeHttpRequest();
 
 		ObjectMapper mapper = new ObjectMapper();
-//		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//		mapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
+//		mapper.configure(DeserializationFeature.FAIL_ON_MISSING_CREATOR_PROPERTIES, false);
+//		mapper.configure(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT, true);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		ResponseType response = null;
 		try {
 			response = mapper.readValue(jsonString, responseTypeClass);

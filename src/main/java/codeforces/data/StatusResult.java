@@ -3,13 +3,14 @@ package codeforces.data;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class StatusResult {
-	public String status, comment;
-	public List<Submission> result;
+	private String status, comment;
+	private List<Submission> result;
 
 	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
 	public StatusResult(
@@ -19,7 +20,8 @@ public class StatusResult {
 			) {
 		this.status = status;
 		this.comment = comment;
-		this.result = Collections.unmodifiableList(Arrays.asList(result));
+		if (result==null) result = new Submission[0];
+		this.result = List.of(result);
 	}
 
 	public String getStatus() {
