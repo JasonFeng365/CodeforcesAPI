@@ -29,4 +29,8 @@ public final class CodeforcesApi {
 		if (authenticated) return new StatusRequestBuilder(KEY, SECRET);
 		else return new StatusRequestBuilder();
 	}
+	public StandingsRequestBuilder newStandingsRequest() {
+		if (authenticated) return new StandingsRequestBuilder(KEY, SECRET);
+		else return new StandingsRequestBuilder();
+	}
 }
