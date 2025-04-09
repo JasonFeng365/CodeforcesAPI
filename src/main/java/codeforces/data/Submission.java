@@ -40,6 +40,8 @@ public class Submission {
 		this.timeConsumedMillis = timeConsumedMillis;
 		this.memoryConsumedBytes = memoryConsumedBytes;
 		this.points = points;
+
+		if (!problem.getType().equals("IOI")) this.points = 1;
 	}
 
 	public long getId() {

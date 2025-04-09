@@ -34,6 +34,8 @@ public class Problem {
 		this.rating = rating;
 		if (tags==null) tags = new String[0];
 		this.tags = List.of(tags);
+
+		if (!type.equals("IOI")) this.points = 1;
 	}
 
 	public long getContestId() {

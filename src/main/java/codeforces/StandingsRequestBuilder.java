@@ -41,6 +41,13 @@ public final class StandingsRequestBuilder extends RequestBuilder<StandingsResul
 		return this;
 	}
 
+	public StandingsRequestBuilder setShowUnofficial(boolean showUnofficial) {
+		params.put("showUnofficial", Boolean.toString(showUnofficial));
+		return this;
+	}
+
+
+
 	@Override
 	public Request<StandingsResult> build() {
 		return build(StandingsResult.class);
